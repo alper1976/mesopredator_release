@@ -1,0 +1,7 @@
+Manuscript latex references not fully covered by the supplied approved scripts:
+Figure6_topdown.png: requires separate top-down model pipeline from other chat.
+Supplementary/Predator_population_dynamics.png: not created in supplied scripts.
+Supplementary/Prey_population_dynamics.png: not created in supplied scripts.
+Supplementary/bioenergetic_workflows.pdf: not created in supplied scripts.
+Figure1 and Figure5 original manuscript files are separately named, while accepted script 05 exports combined four-panel FOO+RRA; see approved figure source and validation artifacts.
+No missing figure is silently replaced by an unrelated image.

@@ -1,0 +1,6 @@
+"check","passed","note"
+"all_four_mandatory_original_inputs",TRUE,"All 4 original phyloseq input RDS files are present with source MD5."
+"all_expected_scripts_present",TRUE,"Checks the exact script names in the standalone bundle."
+"all_locked_GLLVM_SIA_references_present",TRUE,"Locked references are required to reproduce approved model/SIA outputs."
+"no_explicit_external_paths_in_scripts",TRUE,"Static heuristic only; inspect any path rows and test the pipeline."
+"full_pipeline_runtime_verified",NA,"Unknown until RUN_ALL.R has completed successfully on the target machine."

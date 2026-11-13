@@ -1,0 +1,8 @@
+"path","present","md5"
+"processed_data/reference_sia/31_full_reconstruction/31_SIA_predator_samples_FINAL.csv",TRUE,"e1884142eefb6288e5d3ab8ac5d647bb"
+"processed_data/reference_sia/31_full_reconstruction/31_SIA_reference_individuals.csv",TRUE,"2b3a7ee931bb5633c26e122703c46cad"
+"processed_data/reference_sia/31_full_reconstruction/31_SIA_reference_summary_FINAL.csv",TRUE,"a66c0c9a926dae2b6e7a816ca8a31f41"
+"processed_data/reference_sia/31_full_reconstruction/31_SIA_predator_summary_FINAL.csv",TRUE,"93e7decfd53c8a443fc6bb7f50ec7434"
+"processed_data/reference_models/MiFish/20_GLLVM_decision/20_cormorant_p05_tweedie_halfyear_lv0_fit.rds",TRUE,"d8a6bea7ce9d9a1a9b41c274a8ba62bc"
+"processed_data/reference_models/MiFish/20_GLLVM_decision/20_harbor_seal_p05_tweedie_halfyear_lv0_fit.rds",TRUE,"680fe07b3b56fa3d6beee4c4ef8756aa"
+"processed_data/reference_models/GLLVM/29A_COI_original/29A_COI_COEFFICIENTS_cormorant.csv",TRUE,"afd2dcf75627f35bea4024336733844e"

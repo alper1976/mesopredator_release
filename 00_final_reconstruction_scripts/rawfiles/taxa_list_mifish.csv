@@ -1,0 +1,48 @@
+"Taxon","LCA_rank","Functional_group","FOO_cormorant","FOO_seal"
+"Myoxocephalus scorpius Myoxocephalus quadricornis","species","Benthic",46.5,14.7
+"Pleuronectes platessa Platichthys flesus","species","Benthic",38.4,16
+"Gobius niger","species","Benthic",15.1,0
+"Pholis gunnellus","species","Benthic",9.3,2.7
+"Pomatoschistus minutus","species","Benthic",9.3,1.3
+"Platichthys flesus Pleuronectes platessa Hippoglossoides platessoides","species","Benthic",10.5,0
+"Taurulus bubalis","species","Benthic",4.7,1.3
+"Limanda limanda Hippoglossus hippoglossus","species","Benthic",4.7,0
+"Zoarces viviparus","species","Benthic",1.2,2.7
+"Solea solea","species","Benthic",3.5,0
+"Lumpenus lampretaeformis","species","Benthic",0,2.7
+"Lumpenus lampretaeformis Lumpenus fabricii","species","Benthic",0,2.7
+"Anguilla anguilla","species","Benthic",2.3,0
+"Leptoclinus maculatus","species","Benthic",0,1.3
+"Myoxocephalus","genus","Benthic",1.2,0
+"Pleuronectes platessa","species","Benthic",1.2,0
+"Pomatoschistus microps","species","Benthic",1.2,0
+"Scophthalmus rhombus","species","Benthic",1.2,0
+"Gadus morhua","species","Demersal",36,28
+"Symphodus melops","species","Demersal",24.4,6.7
+"Pollachius virens Pollachius pollachius","species","Demersal",7,12
+"Merlangius merlangus","species","Demersal",4.7,4
+"Gobiusculus flavescens","species","Demersal",3.5,1.3
+"Labrus bergylta","species","Demersal",3.5,1.3
+"Aphia minuta","species","Demersal",1.2,1.3
+"Merluccius merluccius","species","Demersal",1.2,1.3
+"Enchelyopus cimbrius","species","Demersal",0,1.3
+"Molva molva","species","Demersal",0,1.3
+"Trisopterus minutus","species","Demersal",0,1.3
+"Callionymus lyra","species","Demersal",1.2,0
+"Merlangius merlangus Gadus morhua","species","Demersal",1.2,0
+"Pollachius pollachius Pollachius virens","species","Demersal",1.2,0
+"Raniceps raninus","species","Demersal",1.2,0
+"Pomatoschistus pictus","species","Other",1.2,1.3
+"Clupea harengus","species","Pelagic",31.4,48
+"Gasterosteus aculeatus","species","Pelagic",15.1,0
+"Sprattus sprattus Clupea pallasii","species","Pelagic",2.3,6.7
+"Hyperoplus lanceolatus Ammodytes tobianus Ammodytes marinus Hyperoplus immaculatus","species","Pelagic",0,4
+"Belone belone","species","Pelagic",0,2.7
+"Scomber scombrus","species","Pelagic",0,2.7
+"Spinachia spinachia","species","Pelagic",2.3,0
+"Ammodytes marinus Hyperoplus lanceolatus Ammodytes tobianus","species","Pelagic",0,1.3
+"Argentina","genus","Pelagic",0,1.3
+"Argentina silus","species","Pelagic",0,1.3
+"Salmo trutta","species","Pelagic",0,1.3
+"Sprattus sprattus","species","Pelagic",0,1.3
+"Sprattus sprattus Clupea harengus","species","Pelagic",0,1.3

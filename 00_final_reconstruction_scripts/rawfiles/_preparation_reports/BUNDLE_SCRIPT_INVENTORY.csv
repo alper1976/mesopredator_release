@@ -1,0 +1,15 @@
+"script","present"
+"01_Sequencing_QC.R",TRUE
+"02_Rarefaction_Threshold_Test.R",TRUE
+"03_Phyloseq_Preprocessing.R",TRUE
+"04_PERMANOVA_PCoA.R",TRUE
+"04B_PERMANOVA_PCoA.R",TRUE
+"05_Diet_Composition_FOO_RRA.R",TRUE
+"06_GLLVM.R",TRUE
+"07_Trophic_Network.R",TRUE
+"07B_Trophic_Network_Sensitivity_Jackknife.R",TRUE
+"08_Stable_Isotope_Analysis.R",TRUE
+"09_Functional_Group_Composition.R",TRUE
+"10_Manuscript_Tables.R",TRUE
+"RUN_ALL.R",TRUE
+"COLLECT_MANUSCRIPT_OUTPUTS.R",TRUE
