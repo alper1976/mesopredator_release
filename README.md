@@ -16,24 +16,24 @@ Fishery-independent CPUE integrations (IMR Beach Seine Survey) for data-limited 
 
 ### Repository Structure
 ├── Bioinformatics/<br>
-│   ├── 01_cutadapt_trimming.sh<br>          # Primer removal
-│   ├── 02_dada2_pipeline.R<br>              # ASV inference and chimaera removal
-│   ├── 03_lca_taxonomy_assignment.py<br>    # Lowest Common Ancestor (LCA) assignment
-│   └── 04_scrub_decontamination.R<br>       # SCRUB implementation for plate-well leakage
+│   ├── 01_cutadapt_trimming.sh          # Primer removal<br>
+│   ├── 02_dada2_pipeline.R              # ASV inference and chimaera removal<br>
+│   ├── 03_lca_taxonomy_assignment.py    # Lowest Common Ancestor (LCA) assignment<br>
+│   └── 04_scrub_decontamination.R       # SCRUB implementation for plate-well leakage<br>
 ├── Data/<br>
-│   ├── Inputs/<br>                          # Raw inputs for Monte Carlo models
-│   │   ├── Metadata_TnT_main.csv<br>        # Sample metadata
-│   │   ├── species_table_n.csv<br>          # Filtered ASV abundance matrices
-│   │   ├── wrasse_cpue_skagerrak.csv<br>    # IMR Flødevigen beach-seine CPUE index
+│   ├── Inputs/                          # Raw inputs for Monte Carlo models<br>
+│   │   ├── Metadata_TnT_main.csv        # Sample metadata<br>
+│   │   ├── species_table_n.csv          # Filtered ASV abundance matrices<br>
+│   │   ├── wrasse_cpue_skagerrak.csv    # IMR Flødevigen beach-seine CPUE index<br>
 │   │   └── ...<br> 
 ├── Scripts/<br>
-│   ├── 01_compositional_stats.R<br>         # rCLR, PCoA, PERMANOVA (vegan)
-│   ├── 02_gllvm_temporal_models.R<br>       # Taxon-level GLVM modeling (gllvm)
-│   ├── 03_trophic_network.R<br>             # Network construction (igraph/ggraph)
-│   └── Mesopredator_MASTER_v1_4.R<br>       # Primary Monte Carlo bioenergetic simulation
+│   ├── 01_compositional_stats.R         # rCLR, PCoA, PERMANOVA (vegan)<br>
+│   ├── 02_gllvm_temporal_models.R       # Taxon-level GLVM modeling (gllvm)<br>
+│   ├── 03_trophic_network.R             # Network construction (igraph/ggraph)<br>
+│   └── Mesopredator_MASTER_v1_4.R       # Primary Monte Carlo bioenergetic simulation<br>
 └── Output/<br>
-    ├── Figures/<br>                         # Generated plots (ggplot2)
-    └── Tables/<br>                          # Exported QC tables and MC summaries
+    ├── Figures/                         # Generated plots (ggplot2)<br>
+    └── Tables/                          # Exported QC tables and MC summaries<br>
 
 ## Prerequisites & Dependencies
 ### R Packages
