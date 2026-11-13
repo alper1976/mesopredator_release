@@ -1,7 +1,7 @@
-# Mesopredator analysis — collaborator run package
+# Mesopredator analysis — Bioenergetic and Top-Down Impact Modeling
 
 ## Purpose
-This minimal package contains the revised 2012–2025 mesopredator master R script, its three local input datasets, archived ICES cod assessment tables used as an API fallback, and essential methodological documentation. It intentionally excludes earlier scripts, intermediate results, plots, and large raw DATRAS datasets.
+The complete analytical workflow, integrating predator energy demand, molecular diet allocation, and empirical prey biomass through a Monte Carlo simulation loop. This folder contains the 2012–2025 mesopredator master R script, its three local input datasets, archived ICES cod assessment tables used as an API fallback, and essential methodological documentation. It intentionally excludes earlier scripts, intermediate results, plots, and large raw DATRAS datasets.
 
 ## Prerequisites
 - R and internet access to the ICES Stock Assessment Graphs API.
