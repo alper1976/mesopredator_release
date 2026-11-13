@@ -1,5 +1,5 @@
 # Molecular diets of apex predators reveal trophic rewiring in a transitional coastal system
-This repository contains the code, configuration files, and analytical pipelines used for the manuscript: "Molecular diets of apex predators reveal dietary partitioning and exploitation of mesopredator release in a transitional coastal system" by Røstum et al. (2026).
+This repository contains the code, configuration files, and analytical pipelines used for the manuscript: "Molecular diets of apex predators reveal dietary partitioning and exploitation of mesopredator release in a transitional coastal system" by Røstum et al. (2026). The code in this repository was written by Tarjei Røstum, Thorvald Angell, Even Werner, Eivind Stensrud, and Alexander Eiler with support from various AI agents.
 ## Overview
 This project investigates the multi-trophic restructuring of the Skagerrak and Oslofjord coastal ecosystems over a 14-year period (2012–2025). By integrating multi-marker dietary DNA metabarcoding (MiFish 12S and COI Leray-XT), stable isotope analysis ($\delta^{15}N$, $\delta^{13}C$), and stochastic bioenergetic modeling, we track the foraging shifts of two expanding apex predators: the harbour seal (Phoca vitulina) and the great cormorant (Phalacrocorax carbo).
 ## Key Features of this Repository:
