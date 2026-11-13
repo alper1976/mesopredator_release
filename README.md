@@ -15,7 +15,7 @@ ICES Stock Assessment API (icesSAG) for pelagic and demersal standing stocks.
 Fishery-independent CPUE integrations (IMR Beach Seine Survey) for data-limited mesopredators (Labridae).
 
 ### Repository Structure
-├── Bioinformatics/
+├── Bioinformatics/\n
 │   ├── 01_cutadapt_trimming.sh          # Primer removal
 │   ├── 02_dada2_pipeline.R              # ASV inference and chimaera removal
 │   ├── 03_lca_taxonomy_assignment.py    # Lowest Common Ancestor (LCA) assignment
