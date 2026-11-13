@@ -3,11 +3,6 @@
 ## Purpose
 This minimal package contains the revised 2012–2025 mesopredator master R script, its three local input datasets, archived ICES cod assessment tables used as an API fallback, and essential methodological documentation. It intentionally excludes earlier scripts, intermediate results, plots, and large raw DATRAS datasets.
 
-## Important: script version in this package
-The distributed master is a **copy of v1.4 with one requested parameter update**:
-`survival <- exp(-0.55)` (about 57.7% annual age-1-to-age-2 survival).
-The uploaded v1.4 file had `survival <- 0.553`. The copied script was updated to match the agreed literature-informed mortality assumption. The original uploaded file was not overwritten. Results must be regenerated; existing plots/tables do not reflect this update.
-
 ## Prerequisites
 - R and internet access to the ICES Stock Assessment Graphs API.
 - Install these R packages (including packages needed by later sections):
