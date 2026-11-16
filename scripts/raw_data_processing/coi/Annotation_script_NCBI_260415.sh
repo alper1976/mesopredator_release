@@ -1,0 +1,181 @@
+#!/bin/bash
+# Job name: Coi_ncbi_annotation
+#SBATCH --job-name=Coi_ncbi_annotation
+#SBATCH --account=nn9745k
+#SBATCH --time=15:30:00
+#SBATCH --mem=20GB
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=10
+
+### 
+### seq, annotation COI, LCA + blast
+# sequencing run
+# 2025_09_02 sequencing run
+# Misc COI samples
+
+Help()
+{
+   #Display Help
+   echo "Unique Molecular Identifier based error correction for eDNA metabarcoding."
+   echo " "
+   echo "The script expects files to be in a fastq.gz format."
+   echo "The script expects read1 and read2 files being seperated as R1 and R2 files respectively."
+   echo " "
+   echo "Arguments: [-h|-i|-o|-s|-r|-n]"
+   echo " "
+   echo "Options:"
+   echo "-h    Display this help."
+   echo "-i    Path to directory where rawdata file is stored (fastq.gz), char."
+   echo "-o    Path to directory to store output data, char"
+   echo "-s    Path to script"
+   echo "-r    Path to the folder of reference database"
+   echo "-n    Name of reference database in the path"
+}
+
+
+##Setup job environment
+module purge   # clear any inherited modules
+#set -o errexit # exit on errors
+
+
+while getopts "hi:o:s:r:n:b:c:z:l:v:" option; do
+   case $option in
+      h) # display Help
+         Help
+         exit 0
+         ;;
+      i)
+         Input_path="$OPTARG"
+         ;;
+      o)
+         Output_path="$OPTARG"
+         ;;
+      s)
+         Script_path="$OPTARG"
+         ;;
+      r)
+         Reference_database_path="$OPTARG"
+         ;;
+      n) 
+         Reference_database_name="$OPTARG"
+         ;;
+      b)
+         Blast_id_cutoff="$OPTARG"
+         ;;
+      c)
+         Blast_cov_cutoff="$OPTARG"
+         ;;
+      z)
+         LCA_bitscore="$OPTARG"
+         ;;
+      l)
+         LCA_id_cutoff="$OPTARG"
+         ;;
+      v)
+         LCA_cov_cutoff="$OPTARG"
+         ;;
+
+
+   esac
+done
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd ) # set curret directory as working directory if non is selected.
+#SCANDIFISH_DIR=/cluster/projects/nn9745k/03_databases/fish/ScandiFish_12s_v1.4/ # set reference database directory of ScandiFish if non is selected. # on saga
+
+if [ -z "$Input_path" ]; then Input_path="/cluster/projects/nn9744k/02_results/51_Stensrud_students/tnt/coi/Figs"; fi #where the rep-seqs.fna output file is
+if [ -z "$Output_path" ]; then Output_path="/cluster/projects/nn9744k/02_results/51_Stensrud_students/tnt/coi/Figs"; fi #Where to store the output, standard the same as $Input_path
+if [ -z "$Script_path" ]; then Script_path="/cluster/projects/nn9744k/scripts/51_Stensrud_students/tnt/coi"; fi #if the script directory is not selected, script path is as standard for saga
+if [ -z "$Reference_database_path" ]; then Reference_database_path="/cluster/projects/nn9745k/03_databases/COI/Invasive_species/241218"; fi #if the reference database is not selected, ScandiFish v1.4 will be used
+if [ -z "$Reference_database_name" ]; then Reference_database_name="Invasive_Scandi_Coi_2024-12-18_db"; fi #if the reference database is not selected, ScandiFish v1.4 will be used
+if [ -z "$Blast_id_cutoff" ]; then Blast_id_cutoff=99; fi #Blast species annotation identity cutoff #99
+if [ -z "$Blast_cov_cutoff" ]; then Blast_cov_cutoff=99; fi #Blast species annotation coverage cutoff #99
+if [ -z "$LCA_bitscore" ]; then LCA_bitscore=8; fi #LCA Bitscore top percentage threshold
+if [ -z "$LCA_id_cutoff" ]; then LCA_id_cutoff=97; fi #LCA Bitscore top percentage threshold #98
+if [ -z "$LCA_cov_cutoff" ]; then LCA_cov_cutoff=98; fi #LCA Bitscore top percentage threshold #98
+
+
+#download reference database
+#cd $Reference_database_path
+
+#wget -nc https://raw.githubusercontent.com/EivindStensrud/ScandiFish/main/ScandiFish_12s_v1.4/ScandiFish_12s_v1.4_nf.fasta -P $Reference_database_path #Downloads database
+#wget -nc https://raw.githubusercontent.com/EivindStensrud/ScandiFish/main/ScandiFish_12s_v1.4/ScandiFish_12s_v1.4_nf.fasta.md5 -P $Reference_database_path # Downloads md5sum
+
+#md5sum -c $Reference_database_path/ScandiFish_12s_v1.4_nf.fasta.md5 > $Output_path/checkmd5.md5 # Creates files which can be checked if md5sum is correct. Needs to updated for new database version
+# Downloads LCA script from GitHub.
+
+printf "Initiation the annotation using BLAST with $Reference_database_path/$Reference_database_name \n"
+echo " "
+module purge
+
+module load BLAST+/2.13.0-gompi-2022a
+
+## Assigning taxonomy by BLASTN
+#
+blastn -query $Input_path/rep-seqs.fna -db /cluster/shared/databases/blast/2026-01-02/nt -task megablast -num_threads 16 -max_hsps 1 -perc_identity 80 -qcov_hsp_perc 80 -out $Output_path/output_blast_results -outfmt "6 qseqid stitle sacc staxid pident qcovs evalue bitscore" -max_target_seqs 20 #works
+
+
+module purge
+
+module load Biopython/1.79-foss-2021a
+
+cd $Script_path
+#wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-BLAST/refs/heads/master/lite_version/headerandcoverage.py #does not work correctly, find from 42_harbour
+rm $Output_path/output_blast_results_covfiltered.tabular
+python $Script_path/headerandcoverage.py -i $Output_path/output_blast_results -cov $LCA_cov_cutoff -ident $LCA_id_cutoff #this works, continue below.
+
+#wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-BLAST/refs/heads/master/blastn_add_taxonomy_lite.py #does not work correctly, find from 42_harbour
+
+#wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-BLAST/refs/heads/master/add_taxonomy_scripts/bold.py #does not work correctly, find from 42_harbour
+#wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-BLAST/refs/heads/master/add_taxonomy_scripts/gbif.py #does not work correctly, find from 42_harbour
+#wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-BLAST/refs/heads/master/add_taxonomy_scripts/genbank.py #does not work correctly, find from 42_harbour
+#wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-BLAST/refs/heads/master/add_taxonomy_scripts/privatebold.py #does not work correctly, find from 42_harbour
+#wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-BLAST/refs/heads/master/add_taxonomy_scripts/silva.py #does not work correctly, find from 42_harbour
+#wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-BLAST/refs/heads/master/add_taxonomy_scripts/unite.py #does not work correctly, find from 42_harbour
+
+#works with scripts at /cluster/projects/nn9244k/elina/scripts
+python $Script_path/blastn_add_taxonomy_lite.py -i $Output_path/output_blast_results_covfiltered.tabular -t /cluster/shared/databases/blast/ncbi-taxdump/2026-01-03/rankedlineage.dmp -m /cluster/shared/databases/blast/ncbi-taxdump/2026-01-03/merged.dmp -o $Output_path/taxonomy_output_covfiltered.tabular
+ 
+echo " "
+printf "Initiation the Rscript, Blast_annotation.R with \n"
+echo " "
+module purge
+
+module load R-bundle-Bioconductor/3.16-foss-2022b-R-4.2.2
+
+Rscript $Script_path/Blast_annotation_NCBI.R -i $Input_path -o $Output_path # starts r script to create sequence table in dada2 and phyloseq compatible format.
+
+printf "Finished with annotation using the Rscript Blast_annotation.R \n"
+
+
+wget -nc https://raw.githubusercontent.com/naturalis/galaxy-tool-lca/master/lca.py -P $Script_path #downloads lca.py if it do not exist
+
+## Run LCA analysis in bash # run example 3 from link https://github.com/naturalis/galaxy-tool-lca
+## Make sure to empty table before re-running the code, otherwise will append data, not overwrite.
+
+rm $Output_path/blast_result_file.lca.tabular_04_98_out # Removes table if existing LCA analysis exist.
+
+## LCA analysis
+## Best hit goes to species, taxonomic sorting is conducted if top hit <99%
+
+
+python $Script_path/lca.py -i $Output_path/blast_result_file.lca.tabular -o $Output_path/blast_result_file.lca.tabular_04_98_out -b $LCA_bitscore -id $LCA_id_cutoff -cov $LCA_cov_cutoff -t best_hits_range -tid $Blast_id_cutoff -tcov $Blast_cov_cutoff -flh unknown
+
+module purge
+
+module load R-bundle-Bioconductor/3.16-foss-2022b-R-4.2.2
+
+
+echo " "
+echo "Finished with LCA annotation"
+echo " "
+
+#only fix headers for blast_results
+Rscript $Script_path/Create_phyloseq_object_NCBI.R -i $Input_path -o $Output_path -b $Blast_id_cutoff -c $Blast_cov_cutoff
+
+echo " "
+echo " "
+echo "Finished to make Phyloseq object"
+echo " "
+echo " "
+printf "The script was finished %(%Y-%m-%d %H:%M:%S)T\n"
+

@@ -40,16 +40,17 @@ mesopredator_release-main/
 ### R Packages
 The statistical and bioenergetic modeling scripts were developed using R (version 4.x). Ensure the following core packages are installed:
 
-install.packages(c("tidyverse", "vegan", "gllvm", "MASS", "igraph", "ggraph", "patchwork"))
+install.packages(c("tidyverse", "vegan", "gllvm", "MASS", "igraph", "ggraph", "patchwork", "phyloseq"))
 
 For dynamic stock extraction, you will need the ICES Stock Assessment Graph API package:
 
 install.packages("icesSAG")
 
 ### Bioinformatic Tools
-Cutadapt (v4.4+)
-DADA2 (v1.28+)
-SCRUB (Source-tracking for Contamination Removal in microBiomes)
+* Cutadapt (v4.4+)
+* DADA2 (v1.28+)
+* SCRUB (Source-tracking for Contamination Removal in microBiomes)
+* Galaxy Tool LCA](https://github.com/naturalis/galaxy-tool-lca) (Used for Lowest Common Ancestor taxonomic assignment).
 
 ### Data Availability
 Raw Sequence Data: Demultiplexed .fastq files for all 172 samples are available on the NCBI Sequence Read Archive (SRA) under BioProject PRJNA[XXXXXX].
@@ -62,13 +63,14 @@ Regional monitoring baselines extracted from the Norwegian Water Environment dat
 
 ## Workflow Instructions
 ### 1. Bioinformatics & ASV Profiling
-Navigate to the Bioinformatics/ directory. Run the shell and R scripts sequentially. The pipeline outputs clean ASV count tables. A strict $0.1\%$ global relative abundance threshold is applied prior to robust Aitchison transformations to filter transient sequencing noise without artificial sample rarefaction.
+Navigate to the `scripts/statistics/` directory. Run the initial scripts sequentially (e.g., `01_Sequencing_QC.R` through `03_Phyloseq_Preprocessing.R`), or simply execute `RUN_ALL.R` to process the entire pipeline. The pipeline outputs clean ASV count tables. A strict 0.1% global relative abundance threshold is applied prior to robust Aitchison transformations to filter transient sequencing noise without artificial sample rarefaction.
+
 ### 2. Compositional & Trophic Analysis
-Run Scripts/01_compositional_stats.R and 02_gllvm_temporal_models.R to reproduce the beta-diversity ordinations and taxon-level temporal trajectories. Secondary prey ingestion networks are reconstructed using 03_trophic_network.R.3. 
+Run `scripts/statistics/04_PERMANOVA_PCoA.R` and `scripts/statistics/06_GLLVM.R` to reproduce the beta-diversity ordinations and taxon-level temporal trajectories. Secondary prey ingestion networks are reconstructed using `scripts/statistics/07_Trophic_Network.R`.
 
 ### 3. Bioenergetic Modeling
-The main simulation is housed in Scripts/Mesopredator_MASTER_v1_4.R.
-This script automatically downloads the latest ICES stock assessment parameters via the API (including the multi-substock spatial approximations for recent cod demographics). It integrates the digitized IMR Flødevigen beach-seine CPUE to establish effort-corrected wrasse standing stocks. The script runs a 5,000-iteration Monte Carlo loop to propagate uncertainties across diet model coefficients, daily energetic mass intake ($D$), regional residency time ($T$), and prey biomass approximations.Note: Requires internet access to ping the icesSAG database .
+The main simulation is housed in `scripts/modeling/Mesopredator_MASTER_v1_4_2012_2025_all_cormorants.R`.
+This script automatically downloads the latest ICES stock assessment parameters via the API (including the multi-substock spatial approximations for recent cod demographics). It integrates the digitized IMR Flødevigen beach-seine CPUE to establish effort-corrected wrasse standing stocks. The script runs a 5,000-iteration Monte Carlo loop to propagate uncertainties across diet model coefficients, daily energetic mass intake (D), regional residency time (T), and prey biomass approximations.
 
 ## Citation
 If you use this code or data in your work, please cite the corresponding paper:@article{rostum2026molecular,
