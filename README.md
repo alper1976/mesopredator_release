@@ -63,7 +63,11 @@ Regional monitoring baselines extracted from the Norwegian Water Environment dat
 
 ## Workflow Instructions
 ### 1. Bioinformatics & ASV Profiling
-Navigate to the `scripts/statistics/` directory. Run the initial scripts sequentially (e.g., `01_Sequencing_QC.R` through `03_Phyloseq_Preprocessing.R`), or simply execute `RUN_ALL.R` to process the entire pipeline. The pipeline outputs clean ASV count tables. A strict 0.1% global relative abundance threshold is applied prior to robust Aitchison transformations to filter transient sequencing noise without artificial sample rarefaction.
+**A. Raw Data Processing:**
+First, navigate to the `scripts/raw_data_processing/` directory to process the raw demultiplexed sequencing reads. Depending on your target marker (`coi/`, `18s/`, or `12s/`), execute the respective `Cutadapt` shell scripts to trim primers, followed by the `dada2_*_parallel.R` scripts for ASV inference. Next, run the taxonomy assignment scripts (e.g., BLAST and the Lowest Common Ancestor LCA pipeline) to generate the initial annotated phyloseq objects and raw ASV tables.
+
+**B. Statistical QC & Filtering:**
+Next, navigate to the `scripts/statistics/` directory. Run the initial statistical scripts sequentially (e.g., `01_Sequencing_QC.R` through `03_Phyloseq_Preprocessing.R`), or simply execute `RUN_ALL.R` to process the entire pipeline. The pipeline outputs clean ASV count tables. A strict 0.1% global relative abundance threshold is applied prior to robust Aitchison transformations to filter transient sequencing noise without artificial sample rarefaction.
 
 ### 2. Compositional & Trophic Analysis
 Run `scripts/statistics/04_PERMANOVA_PCoA.R` and `scripts/statistics/06_GLLVM.R` to reproduce the beta-diversity ordinations and taxon-level temporal trajectories. Secondary prey ingestion networks are reconstructed using `scripts/statistics/07_Trophic_Network.R`.
