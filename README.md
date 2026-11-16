@@ -1,5 +1,5 @@
 # Molecular diets of apex predators reveal trophic rewiring in a transitional coastal system
-This repository contains the data, scripts, and modeling outputs for the mesopredator release reconstruction and trophic network analysis.
+This repository contains the data, scripts, and modeling outputs for the mesopredator release reconstruction and trophic network analysis. Code was contributed by Trajei Røstum, Thorvald Angell, Eivind Stensrud, Even Werner and Alexander Eiler.
 
 ## Repository Structure
 
