@@ -1,39 +1,40 @@
 # Molecular diets of apex predators reveal trophic rewiring in a transitional coastal system
-This repository contains the code, configuration files, and analytical pipelines used for the manuscript: "Molecular diets of apex predators reveal dietary partitioning and exploitation of mesopredator release in a transitional coastal system" by Røstum et al. (2026). The code in this repository was written by Tarjei Røstum, Thorvald Angell, Even Werner, Eivind Stensrud, and Alexander Eiler with support from various AI agents.
-## Overview
-This project investigates the multi-trophic restructuring of the Skagerrak and Oslofjord coastal ecosystems over a 14-year period (2012–2025). By integrating multi-marker dietary DNA metabarcoding (MiFish 12S and COI Leray-XT), stable isotope analysis ($\delta^{15}N$, $\delta^{13}C$), and stochastic bioenergetic modeling, we track the foraging shifts of two expanding apex predators: the harbour seal (Phoca vitulina) and the great cormorant (Phalacrocorax carbo).
-## Key Features of this Repository:
-### Bioinformatics Pipeline: 
-Amplicon processing via Cutadapt and DADA2, with spatial cross-contamination removal using the SCRUB algorithm.
+This repository contains the data, scripts, and modeling outputs for the mesopredator release reconstruction and trophic network analysis.
 
-### Statistical Data Analysis: 
-Robust centered log-ratio (rCLR) transformations, PERMANOVA, and temporal modeling using Generalised Linear Latent Variable Models (GLLVMs).
+## Repository Structure
 
-### Bioenergetic Monte Carlo Simulation: 
-A unified 5,000-draw stochastic simulation framework predicting absolute biomass consumption and top-down impact ratios, integrating:
-ICES Stock Assessment API (icesSAG) for pelagic and demersal standing stocks.
-Fishery-independent CPUE integrations (IMR Beach Seine Survey) for data-limited mesopredators (Labridae).
+* **`data/`**: Contains all data required for the analysis.
+  * `raw/`: Combined input data, unprocessed sequencing data, CN data, and species tables.
+  * `processed/`: Combined processed data, intermediate outputs, and cleaned phyloseq objects.
+* **`docs/`**: 
+  * `modeling/`: Modeling documentation and methodology references.
+  * `validation/`: Statistical analyses validation, missing figures logs, and manuscript scope.
+* **`scripts/`**: 
+  * `statistics/`: Scripts for statistical analyses, PERMANOVA, diet composition, and trophic networks. 
+  * `modeling/`: Scripts for modeling (e.g., `Mesopredator_MASTER...R`).
+  * `raw_data_processing/`: Scripts for raw data processing and formatting.
+* **`results/`**: Final model outputs, figures, and compiled tables.
 
-### Repository Structure
-├── Bioinformatics/<br>
-│   ├── 01_cutadapt_trimming.sh          # Primer removal<br>
-│   ├── 02_dada2_pipeline.R              # ASV inference and chimaera removal<br>
-│   ├── 03_lca_taxonomy_assignment.py    # Lowest Common Ancestor (LCA) assignment<br>
-│   └── 04_scrub_decontamination.R       # SCRUB implementation for plate-well leakage<br>
-├── Data/<br>
-│   ├── Inputs/                          # Raw inputs for Monte Carlo models<br>
-│   │   ├── Metadata_TnT_main.csv        # Sample metadata<br>
-│   │   ├── species_table_n.csv          # Filtered ASV abundance matrices<br>
-│   │   ├── wrasse_cpue_skagerrak.csv    # IMR Flødevigen beach-seine CPUE index<br>
-│   │   └── ...<br> 
-├── Scripts/<br>
-│   ├── 01_compositional_stats.R         # rCLR, PCoA, PERMANOVA (vegan)<br>
-│   ├── 02_gllvm_temporal_models.R       # Taxon-level GLVM modeling (gllvm)<br>
-│   ├── 03_trophic_network.R             # Network construction (igraph/ggraph)<br>
-│   └── Mesopredator_MASTER_v1_4.R       # Primary Monte Carlo bioenergetic simulation<br>
-└── Output/<br>
-    ├── Figures/                         # Generated plots (ggplot2)<br>
-    └── Tables/                          # Exported QC tables and MC summaries<br>
+mesopredator_release-main/
+├── README.md
+├── data/
+│   ├── raw/                 # Combined input data
+│   └── processed/           # Combined processed data
+├── docs/
+│   ├── modeling/            # Modelling Documentation
+│   └── validation/          # Statistical analyses validation
+├── scripts/
+│   ├── statistics/          # Scripts for statistical analyses
+│   ├── modeling/            # Scripts for modeling
+│   └── raw_data_processing/ # Scripts for raw data processing
+└── results/                 # final results
+
+## Usage
+
+1. **Reconstruction**: Navigate to `scripts/reconstruction/` and execute `RUN_ALL.R` to process the raw sequencing and CN data.
+2. **Modeling**: After reconstruction is complete, navigate to `scripts/modeling/` and run the `Mesopredator_MASTER` script to generate the final projections.
+3. **Outputs**: Final tables and manuscript figures will be saved automatically to the `results/` directory.
+
 
 ## Prerequisites & Dependencies
 ### R Packages
