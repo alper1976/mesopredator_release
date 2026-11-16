@@ -14,7 +14,7 @@ This repository contains the data, scripts, and modeling outputs for the mesopre
   * `modeling/`: Scripts for modeling (e.g., `Mesopredator_MASTER...R`).
   * `raw_data_processing/`: Scripts for raw data processing and formatting.
 * **`results/`**: Final model outputs, figures, and compiled tables.
-
+```
 mesopredator_release-main/
 ├── README.md
 ├── data/
@@ -28,7 +28,7 @@ mesopredator_release-main/
 │   ├── modeling/            # Scripts for modeling
 │   └── raw_data_processing/ # Scripts for raw data processing
 └── results/                 # final results
-
+```
 ## Usage
 
 1. **Reconstruction**: Navigate to `scripts/reconstruction/` and execute `RUN_ALL.R` to process the raw sequencing and CN data.
